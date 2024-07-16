@@ -1,0 +1,57 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+android {
+    namespace 'com.cropimage.imaging'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 29
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
+
+apply plugin: "maven-publish"
+publishing {
+
+    publications {
+        release(MavenPublication) {
+            from components.findByName('release')
+            groupId = 'com.github.xuzepei'
+            artifactId = 'imaging'
+            version = '1.0.0'
+        }
+    }
+
+    repositories {
+        maven {
+            url "$buildDir/repo"
+        }
+    }
+}
