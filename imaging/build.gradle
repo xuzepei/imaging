@@ -38,14 +38,26 @@ dependencies {
 }
 
 apply plugin: "maven-publish"
-publishing {
 
+// Configuration to include sources JAR
+task androidSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+publishing {
     publications {
         release(MavenPublication) {
             from components.findByName('release')
             groupId = 'com.github.xuzepei'
             artifactId = 'imaging'
             version = '1.0.0'
+
+            androidSourcesJar
         }
     }
 
