@@ -1,9 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
+    id 'maven-publish'
 }
-apply plugin: "maven-publish"
-//apply plugin: 'com.github.dcendents.android-maven'
-
 
 android {
     namespace 'com.cropimage.imaging'
@@ -39,6 +37,20 @@ android {
     artifacts {
         archives androidSourcesJar
     }
+
+    task printComponents {
+        doLast {
+            println components.names
+        }
+    }
+
+    publishing {
+        // Publish your app as an AAB
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -56,15 +68,14 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-                from components.findByName('release')
+                println("####Components: " + components*.name)
+                from components.release
                 //建议和github地址对应，否则对jitpack无效
                 groupId = 'com.github.xuzepei'
                 //建议和github仓库名称对应，否则对jitpack无效
                 artifactId = 'imaging'
                 //建议和release的tag相同，否则对jitpack无效
                 version = '1.0.0'
-
-                artifact androidSourcesJar
             }
         }
     }
