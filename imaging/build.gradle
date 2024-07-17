@@ -86,24 +86,23 @@ afterEvaluate {
             }
         }
 
-        repositories {
-            maven {
-                url "${project.buildDir}/repo"
-            }
-        }
+//        repositories {
+//            maven {
+//                url "${project.buildDir}/repo"
+//            }
+//        }
     }
 }
 
 
 //publishing {
 //    publications {
-//        release(MavenPublication) {
-//            from components.findByName('release')
+//        mavenJava(MavenPublication) {
 //            groupId = 'com.github.xuzepei'
 //            artifactId = 'imaging'
 //            version = '1.0.0'
 //
-//            androidSourcesJar
+//            from components.java
 //        }
 //    }
 //
