@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
 }
+apply plugin: "maven-publish"
+//apply plugin: 'com.github.dcendents.android-maven'
+
+
 android {
     namespace 'com.cropimage.imaging'
     compileSdk 34
@@ -25,6 +29,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // Task to create sources JAR
+    task androidSourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        archiveClassifier.set('sources')
+    }
+
+    artifacts {
+        archives androidSourcesJar
+    }
 }
 
 dependencies {
@@ -37,33 +51,41 @@ dependencies {
     androidTestImplementation libs.espresso.core
 }
 
-apply plugin: "maven-publish"
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.findByName('release')
+                //建议和github地址对应，否则对jitpack无效
+                groupId = 'com.github.xuzepei'
+                //建议和github仓库名称对应，否则对jitpack无效
+                artifactId = 'imaging'
+                //建议和release的tag相同，否则对jitpack无效
+                version = '1.0.0'
 
-// Configuration to include sources JAR
-task androidSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    archiveClassifier.set('sources')
-}
-
-artifacts {
-    archives androidSourcesJar
-}
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            from components.findByName('release')
-            groupId = 'com.github.xuzepei'
-            artifactId = 'imaging'
-            version = '1.0.0'
-
-            androidSourcesJar
-        }
-    }
-
-    repositories {
-        maven {
-            url "$buildDir/repo"
+                artifact androidSourcesJar
+            }
         }
     }
 }
+
+
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            from components.findByName('release')
+//            groupId = 'com.github.xuzepei'
+//            artifactId = 'imaging'
+//            version = '1.0.0'
+//
+//            androidSourcesJar
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            url "$buildDir/repo"
+//        }
+//    }
+//}
