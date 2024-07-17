@@ -1,7 +1,11 @@
 plugins {
-    alias(libs.plugins.android.library)
+    //alias(libs.plugins.android.library)
+    id 'com.android.library'
     id 'maven-publish'
 }
+
+group = 'com.github.xuzepei'
+version = '1.0.0'
 
 android {
     namespace 'com.cropimage.imaging'
@@ -54,6 +58,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
