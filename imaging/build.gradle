@@ -4,9 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.github.xuzepei'
-version = '1.0.0'
-
 android {
     namespace 'com.cropimage.imaging'
     compileSdk 34
@@ -27,19 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    // Task to create sources JAR
-    task androidSourcesJar(type: Jar) {
-        from android.sourceSets.main.java.srcDirs
-        archiveClassifier.set('sources')
-    }
-
-    artifacts {
-        archives androidSourcesJar
     }
 
     task printComponents {
@@ -58,10 +46,6 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -86,30 +70,5 @@ afterEvaluate {
                 version = '1.0.0'
             }
         }
-
-//        repositories {
-//            maven {
-//                url "${project.buildDir}/repo"
-//            }
-//        }
     }
 }
-
-
-//publishing {
-//    publications {
-//        mavenJava(MavenPublication) {
-//            groupId = 'com.github.xuzepei'
-//            artifactId = 'imaging'
-//            version = '1.0.0'
-//
-//            from components.java
-//        }
-//    }
-//
-//    repositories {
-//        maven {
-//            url "$buildDir/repo"
-//        }
-//    }
-//}
