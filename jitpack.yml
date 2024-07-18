@@ -1,0 +1,6 @@
+jdk:
+  - openjdk17
+
+install:
+  - ./gradlew clean
+  - ./gradlew :imaging:publishReleasePublicationToMavenLocal
