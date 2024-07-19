@@ -1,6 +1,6 @@
 # Imaging Library
 
-An image editor library for android. Similar the image editor in WeChat app.
+An image editor library for Android. Similar to the image editor in the WeChat app.
 
 ### Main feature:
 
@@ -11,9 +11,7 @@ An image editor library for android. Similar the image editor in WeChat app.
 - **Doodle**
 - **Image cropping**
 
-<img src="./readme/s1.png" alt="Example Image" width="auto" height="500">
-
-<img src="./readme/s2.png" alt="Example Image" width="auto" height="500">
+<div style="display: flex; justify-center; align-items: center;">   <img src="./readme/s1.png" alt="First Image" style="width: 30%;"/>   <img src="./readme/s2.png" alt="Second Image" style="width: 30%;"/> </div>
 
 ### How to use
 
