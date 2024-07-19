@@ -51,9 +51,8 @@ An image editor library for Android. Similar to the image editor in the WeChat a
        }
    });
 
-4. Localization:
-     This library only supports English by now. But you can localize it by setting different languages for these string ids.
-
+4. Localization: this library only supports English by now. But you can localize it by setting different languages for these string ids.
+     
      ```java
      <resources>
          <string name="image_doodle">"Doodle"</string>
