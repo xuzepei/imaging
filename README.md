@@ -2,7 +2,7 @@
 
 An image editor library for Android. Similar to the image editor in the WeChat app.
 
-### Main feature:
+### Main features:
 
 - **Drawing a box**
 - **Drawing a circle**
