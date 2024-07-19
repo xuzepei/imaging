@@ -28,7 +28,7 @@ An image editor library for Android. Similar to the image editor in the WeChat a
    }
    ```
 
-2. Add to dependencies in build.gradle of app level
+2. Add to dependencies in build.gradle of app level:
 
    ```java
    dependencies {
@@ -48,29 +48,29 @@ An image editor library for Android. Similar to the image editor in the WeChat a
            if (bitmap != null) {
                //The bitmap edited
            }
-	    }
-	});
-	
-### Localization
-This library only supports English by now. But you can localize it by setting different languages for these string ids.
+       }
+   });
 
-```java
-<resources>
-    <string name="image_doodle">"Doodle"</string>
-    <string name="image_text">"Text"</string>
-    <string name="image_mosaic">"Mosaic"</string>
-    <string name="image_clip">"Crop"</string>
-    <string name="image_reset">"Restore"</string>
-    <string name="image_done">"Done"</string>
-    <string name="image_cancel">"Cancel"</string>
-    <string name="image_rotate">"Rotate"</string>
-    <string name="image_mosaic_tip">"Blur"</string>
-    <string name="image_undo">"Undo"</string>
-    <string name="image_all_photo">"All Photos"</string>
-    <string name="image_original">"Original"</string>
-    <string name="image_preview">"Preview"</string>
-</resources>
-```
+4. Localization:
+     This library only supports English by now. But you can localize it by setting different languages for these string ids.
+
+     ```java
+     <resources>
+         <string name="image_doodle">"Doodle"</string>
+         <string name="image_text">"Text"</string>
+         <string name="image_mosaic">"Mosaic"</string>
+         <string name="image_clip">"Crop"</string>
+         <string name="image_reset">"Restore"</string>
+         <string name="image_done">"Done"</string>
+         <string name="image_cancel">"Cancel"</string>
+         <string name="image_rotate">"Rotate"</string>
+         <string name="image_mosaic_tip">"Blur"</string>
+         <string name="image_undo">"Undo"</string>
+         <string name="image_all_photo">"All Photos"</string>
+         <string name="image_original">"Original"</string>
+         <string name="image_preview">"Preview"</string>
+     </resources>
+     ```
 ### Thanks
 
 I am also standing on the shoulders of giants. Thanks to these projects.
