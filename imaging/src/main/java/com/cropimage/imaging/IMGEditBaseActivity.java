@@ -1,9 +1,17 @@
 package com.cropimage.imaging;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowInsets;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.ViewSwitcher;
 
@@ -55,6 +63,55 @@ abstract class IMGEditBaseActivity extends AppCompatActivity implements View.OnC
             mImgView.setImageBitmap(bitmap);
             onCreated();
         } else finish();
+
+        ImageView cancelIV = findViewById(R.id.tv_cancel);
+        if (cancelIV != null) {
+            adjustForStatusBar(this, cancelIV);
+        }
+    }
+
+    public static void adjustForStatusBar(final Activity activity, final View view) {
+        if (view == null || activity == null) return;
+
+        view.post(() -> {
+            int statusBarHeight = getStatusBarHeight(activity);
+            int topOffset = 0;
+
+            // 1. 检查刘海/挖孔屏安全区
+            WindowInsets insets = activity.getWindow().getDecorView().getRootWindowInsets();
+            if (insets != null && insets.getDisplayCutout() != null) {
+                int cutoutTop = insets.getDisplayCutout().getSafeInsetTop();
+                if (cutoutTop > 0) {
+                    topOffset = cutoutTop;
+                }
+            }
+
+            // 如果没有刘海，则使用普通状态栏高度
+            if (topOffset == 0) {
+                topOffset = statusBarHeight;
+            }
+
+            // 2. 获取 view 在屏幕上的位置
+            int[] loc = new int[2];
+            view.getLocationOnScreen(loc);
+            int viewTop = loc[1];
+
+            // 3. 仅当 view 顶部被状态栏覆盖时才增加 margin
+            if (viewTop < topOffset) {
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+                params.topMargin += topOffset - viewTop;
+                view.setLayoutParams(params);
+            }
+        });
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
     public void onCreated() {
