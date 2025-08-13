@@ -32,7 +32,7 @@ An image editor library for Android. Similar to the image editor in the WeChat a
 
    ```java
    dependencies {
-       implementation 'com.github.xuzepei:imaging:1.0.0'
+       implementation 'com.github.xuzepei:imaging:1.0.1'
    }
    ```
 
